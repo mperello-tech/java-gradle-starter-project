@@ -1,0 +1,27 @@
+name: Build app
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  gradle:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Check files 1
+      run: ls -al
+
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2
+    
+    - name: Check files 2
+      run: ls -al
+    
+    - name: Execute Gradle build
+      run: ./gradlew build
